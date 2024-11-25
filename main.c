@@ -2,33 +2,31 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "collatz.h"
 #include "cache.h"
+#include "collatz.h"
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[])
+{
 
-    int N = atoi(argv[1]); 
-    int MIN = atoi(argv[2]); 
-    int MAX = atoi(argv[3]); 
+    int N = atoi(argv[1]);
+    int MIN = atoi(argv[2]);
+    int MAX = atoi(argv[3]);
 
-    init_cache(); 
-    srand(time(NULL)); 
+    init_cache();
+    srand(time(NULL));
 
-    for (int i = 0; i < N; i++) 
-    {
+    for (int i = 0; i < N; i++) {
         int number = MIN + rand() % (MAX - MIN + 1);
-        
+
         int cached_steps = get_from_cache(number);
         int steps;
 
-        if (cached_steps != -1) 
-        {
-            steps = cached_steps; 
+        if (cached_steps != -1) {
+            steps = cached_steps;
             printf("Number: %d, Steps: %d (Cache Hit)\n", number, steps);
-        } 
-        else {
+        } else {
             steps = collatz(number);
-            add_to_cache(number, steps); 
+            add_to_cache(number, steps);
             printf("Number: %d, Steps: %d\n", number, steps);
         }
     }

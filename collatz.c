@@ -1,6 +1,7 @@
 #include "collatz.h"
 
-int collatz(int number) {
+int collatz(int number)
+{
     int steps = 0;
     while (number != 1) {
         if (number % 2 == 0) {
